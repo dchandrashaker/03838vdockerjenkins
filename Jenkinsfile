@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('Test') {
             steps {
-                sh 'node --version'
-                sh 'svn --version'
+                sh 'docker build -t workdir:v2 .'
+                sh 'docker run -it workdir:v2 pwd'
             }
         }
     }

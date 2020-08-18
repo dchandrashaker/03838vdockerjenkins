@@ -1,10 +1,14 @@
 pipeline {
     agent { dockerfile true }
     stages {
-        stage('Test') {
+        stage('BuildPhase') {
             steps {
-                sh 'docker build -t workdir:v2 .'
-                sh 'docker run -it workdir:v2 pwd'
+                sh 'docker build -t dchandrashaker/gitjenkinsdocker:latest .'
+                
+            }
+            stage('CommitPhase') {
+            steps {
+                sh 'docker push dchandrashaker/gitjenkinsdocker:latest'
             }
         }
     }
